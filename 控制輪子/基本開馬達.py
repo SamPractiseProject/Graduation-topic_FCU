@@ -33,56 +33,59 @@ while True:
 # Quit
     if ch == 'q':
        curses.endwin()
-       GPIO.output(LIN1, False)     #GPIO17
-       GPIO.output(LIN2, False)     #GPIO18
-       GPIO.output(LIN3, False)     #GPIO22
-       GPIO.output(LIN4, False)     #GPIO23
-       GPIO.output(RIN1, False)     #GPIO7
-       GPIO.output(RIN2, False)     #GPIO11
-       GPIO.output(RIN3, False)     #GPIO25
-       GPIO.output(RIN4, False)     #GPIO10
+       GPIO.output(LIN1, GPIO.LOW)     #GPIO17
+       GPIO.output(LIN2, GPIO.LOW)     #GPIO18
+       GPIO.output(LIN3, GPIO.LOW)     #GPIO22
+       GPIO.output(LIN4, GPIO.LOW)     #GPIO23
+       GPIO.output(RIN1, GPIO.LOW)     #GPIO7
+       GPIO.output(RIN2, GPIO.LOW)     #GPIO11
+       GPIO.output(RIN3, GPIO.LOW)     #GPIO25
+       GPIO.output(RIN4, GPIO.LOW)     #GPIO10
+
+       GPIO.cleanup()       #清除GPIO資料
+
        break
 
 # Forward
     if ch == 'w':
-       GPIO.output(LIN1, True)
-       GPIO.output(LIN2, False)
-       GPIO.output(LIN3, False)
-       GPIO.output(LIN4, True)
-       GPIO.output(RIN1, True)
-       GPIO.output(RIN2, False)
-       GPIO.output(RIN3, False)
-       GPIO.output(RIN4, True)
+       GPIO.output(LIN1, GPIO.LOW)
+       GPIO.output(LIN2, GPIO.HIGH)
+       GPIO.output(LIN3, GPIO.LOW)
+       GPIO.output(LIN4, GPIO.HIGH)
+       GPIO.output(RIN1, GPIO.HIGH)
+       GPIO.output(RIN2, GPIO.LOW)
+       GPIO.output(RIN3, GPIO.LOW)
+       GPIO.output(RIN4, GPIO.HIGH)
 
 # Backward
     if ch == 'x':
-       GPIO.output(LIN1, False)
-       GPIO.output(LIN2, True)
-       GPIO.output(LIN3, True)
-       GPIO.output(LIN4, False)
-       GPIO.output(RIN1, False)
-       GPIO.output(RIN2, True)
-       GPIO.output(RIN3, True)
-       GPIO.output(RIN4, False)
+       GPIO.output(LIN1, GPIO.HIGH)
+       GPIO.output(LIN2, GPIO.LOW)
+       GPIO.output(LIN3, GPIO.HIGH)
+       GPIO.output(LIN4, GPIO.LOW)
+       GPIO.output(RIN1, GPIO.LOW)
+       GPIO.output(RIN2, GPIO.HIGH)
+       GPIO.output(RIN3, GPIO.HIGH)
+       GPIO.output(RIN4, GPIO.LOW)
 
 # Turn Right
     if ch == 'd':
-       GPIO.output(LIN1, True)
-       GPIO.output(LIN2, False)
-       GPIO.output(LIN3, False)
-       GPIO.output(LIN4, True)
-       GPIO.output(RIN1, True)
-       GPIO.output(RIN2, False)
-       GPIO.output(RIN3, False)
-       GPIO.output(RIN4, False)
+       GPIO.output(LIN1, GPIO.HIGH)
+       GPIO.output(LIN2, GPIO.LOW)
+       GPIO.output(LIN3, GPIO.LOW)
+       GPIO.output(LIN4, GPIO.HIGH)
+       GPIO.output(RIN1, GPIO.HIGH)
+       GPIO.output(RIN2, GPIO.LOW)
+       GPIO.output(RIN3, GPIO.LOW)
+       GPIO.output(RIN4, GPIO.LOW)
 
 # Turn Left
     if ch == 'a':
-       GPIO.output(LIN1, False)
-       GPIO.output(LIN2, False)
-       GPIO.output(LIN3, False)
-       GPIO.output(LIN4, True)
-       GPIO.output(RIN1, True)
-       GPIO.output(RIN2, False)
-       GPIO.output(RIN3, False)
-       GPIO.output(RIN4, True)
+       GPIO.output(LIN1, GPIO.LOW)
+       GPIO.output(LIN2, GPIO.LOW)
+       GPIO.output(LIN3, GPIO.LOW)
+       GPIO.output(LIN4, GPIO.HIGH)
+       GPIO.output(RIN1, GPIO.HIGH)
+       GPIO.output(RIN2, GPIO.LOW)
+       GPIO.output(RIN3, GPIO.LOW)
+       GPIO.output(RIN4, GPIO.HIGH)

@@ -50,10 +50,6 @@ def Speed_Control(x):
     value=0
     global pwm_L_A, pwm_L_B, pwm_R_A, pwm_R_B
     if x == 'q':
-        pwm_R_A.ChangeDutyCycle(0)
-        pwm_L_A.ChangeDutyCycle(0)
-        pwm_R_B.ChangeDutyCycle(0)
-        pwm_L_B.ChangeDutyCycle(0)
         for i in range(100,0,-10):
             pwm_R_A.ChangeDutyCycle(i)
             pwm_L_A.ChangeDutyCycle(i)
@@ -62,10 +58,6 @@ def Speed_Control(x):
             time.sleep(1)
 
     if x == 'w':
-        pwm_R_A.ChangeDutyCycle(0)
-        pwm_L_A.ChangeDutyCycle(0)
-        pwm_R_B.ChangeDutyCycle(0)
-        pwm_L_B.ChangeDutyCycle(0)
         for i in range(0,100,10):
             pwm_R_A.ChangeDutyCycle(i)
             pwm_L_A.ChangeDutyCycle(i)
@@ -73,10 +65,6 @@ def Speed_Control(x):
             pwm_L_B.ChangeDutyCycle(i)
             time.sleep(1)
     if x == 'x':
-        pwm_R_A.ChangeDutyCycle(0)
-        pwm_L_A.ChangeDutyCycle(0)
-        pwm_R_B.ChangeDutyCycle(0)
-        pwm_L_B.ChangeDutyCycle(0)
         for i in range(0,100,10):
             pwm_R_A.ChangeDutyCycle(i)
             pwm_L_A.ChangeDutyCycle(i)
@@ -92,61 +80,63 @@ while True:
 # Quit
     if ch == 'q':
        curses.endwin()
-       GPIO.output(LIN1, False)     #GPIO17
-       GPIO.output(LIN2, False)     #GPIO18
-       GPIO.output(LIN3, False)     #GPIO22
-       GPIO.output(LIN4, False)     #GPIO23
-       GPIO.output(RIN1, False)     #GPIO7
-       GPIO.output(RIN2, False)     #GPIO11
-       GPIO.output(RIN3, False)     #GPIO25
-       GPIO.output(RIN4, False)     #GPIO10
+       GPIO.output(LIN1, GPIO.LOW)     #GPIO17
+       GPIO.output(LIN2, GPIO.LOW)     #GPIO18
+       GPIO.output(LIN3, GPIO.LOW)     #GPIO22
+       GPIO.output(LIN4, GPIO.LOW)     #GPIO23
+       GPIO.output(RIN1, GPIO.LOW)     #GPIO7
+       GPIO.output(RIN2, GPIO.LOW)     #GPIO11
+       GPIO.output(RIN3, GPIO.LOW)     #GPIO25
+       GPIO.output(RIN4, GPIO.LOW)     #GPIO10
        Speed_Control(ch)
+
+       GPIO.cleanup()       #清除GPIO資料
+
        break
 
 # Forward
     if ch == 'w':
-       GPIO.output(LIN1, True)
-       GPIO.output(LIN2, False)
-       GPIO.output(LIN3, False)
-       GPIO.output(LIN4, True)
-       GPIO.output(RIN1, True)
-       GPIO.output(RIN2, False)
-       GPIO.output(RIN3, False)
-       GPIO.output(RIN4, True)
+       GPIO.output(LIN1, GPIO.LOW)
+       GPIO.output(LIN2, GPIO.HIGH)
+       GPIO.output(LIN3, GPIO.LOW)
+       GPIO.output(LIN4, GPIO.HIGH)
+       GPIO.output(RIN1, GPIO.HIGH)
+       GPIO.output(RIN2, GPIO.LOW)
+       GPIO.output(RIN3, GPIO.LOW)
+       GPIO.output(RIN4, GPIO.HIGH)
        Speed_Control(ch)
 
 # Backward
     if ch == 'x':
-       GPIO.output(LIN1, False)
-       GPIO.output(LIN2, True)
-       GPIO.output(LIN3, True)
-       GPIO.output(LIN4, False)
-       GPIO.output(RIN1, False)
-       GPIO.output(RIN2, True)
-       GPIO.output(RIN3, True)
-       GPIO.output(RIN4, False)
-       Speed_Control(ch)
+       GPIO.output(LIN1, GPIO.HIGH)
+       GPIO.output(LIN2, GPIO.LOW)
+       GPIO.output(LIN3, GPIO.HIGH)
+       GPIO.output(LIN4, GPIO.LOW)
+       GPIO.output(RIN1, GPIO.LOW)
+       GPIO.output(RIN2, GPIO.HIGH)
+       GPIO.output(RIN3, GPIO.HIGH)
+       GPIO.output(RIN4, GPIO.LOW)
 
 # Turn Right
     if ch == 'd':
-       GPIO.output(LIN1, True)
-       GPIO.output(LIN2, False)
-       GPIO.output(LIN3, False)
-       GPIO.output(LIN4, True)
-       GPIO.output(RIN1, True)
-       GPIO.output(RIN2, False)
-       GPIO.output(RIN3, False)
-       GPIO.output(RIN4, False)
+       GPIO.output(LIN1, GPIO.HIGH)
+       GPIO.output(LIN2, GPIO.LOW)
+       GPIO.output(LIN3, GPIO.LOW)
+       GPIO.output(LIN4, GPIO.HIGH)
+       GPIO.output(RIN1, GPIO.HIGH)
+       GPIO.output(RIN2, GPIO.LOW)
+       GPIO.output(RIN3, GPIO.LOW)
+       GPIO.output(RIN4, GPIO.LOW)
        Speed_Control(ch)
 
 # Turn Left
     if ch == 'a':
-       GPIO.output(LIN1, False)
-       GPIO.output(LIN2, False)
-       GPIO.output(LIN3, False)
-       GPIO.output(LIN4, True)
-       GPIO.output(RIN1, True)
-       GPIO.output(RIN2, False)
-       GPIO.output(RIN3, False)
-       GPIO.output(RIN4, True)
+       GPIO.output(LIN1, GPIO.LOW)
+       GPIO.output(LIN2, GPIO.LOW)
+       GPIO.output(LIN3, GPIO.LOW)
+       GPIO.output(LIN4, GPIO.HIGH)
+       GPIO.output(RIN1, GPIO.HIGH)
+       GPIO.output(RIN2, GPIO.LOW)
+       GPIO.output(RIN3, GPIO.LOW)
+       GPIO.output(RIN4, GPIO.HIGH)
        Speed_Control(ch)
