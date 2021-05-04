@@ -119,18 +119,6 @@ while True:
 
 # Turn Right
     if ch == 'd':
-       GPIO.output(LIN1, GPIO.HIGH)
-       GPIO.output(LIN2, GPIO.LOW)
-       GPIO.output(LIN3, GPIO.LOW)
-       GPIO.output(LIN4, GPIO.HIGH)
-       GPIO.output(RIN1, GPIO.HIGH)
-       GPIO.output(RIN2, GPIO.LOW)
-       GPIO.output(RIN3, GPIO.LOW)
-       GPIO.output(RIN4, GPIO.LOW)
-       Speed_Control(ch)
-
-# Turn Left
-    if ch == 'a':
        GPIO.output(LIN1, GPIO.LOW)
        GPIO.output(LIN2, GPIO.LOW)
        GPIO.output(LIN3, GPIO.LOW)
@@ -139,4 +127,16 @@ while True:
        GPIO.output(RIN2, GPIO.LOW)
        GPIO.output(RIN3, GPIO.LOW)
        GPIO.output(RIN4, GPIO.HIGH)
+       Speed_Control(ch)
+
+# Turn Left
+    if ch == 'a':
+       GPIO.output(LIN1, GPIO.LOW)
+       GPIO.output(LIN2, GPIO.HIGH)
+       GPIO.output(LIN3, GPIO.LOW)
+       GPIO.output(LIN4, GPIO.HIGH)
+       GPIO.output(RIN1, GPIO.HIGH)
+       GPIO.output(RIN2, GPIO.LOW)
+       GPIO.output(RIN3, GPIO.LOW)
+       GPIO.output(RIN4, GPIO.LOW)
        Speed_Control(ch)
