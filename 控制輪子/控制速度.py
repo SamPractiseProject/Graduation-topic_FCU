@@ -5,19 +5,19 @@ from curses import wrapper
 from espeak import espeak
 GPIO.setmode(GPIO.BCM)
 
-RIN1 = 7
-RIN2 = 11
-RIN3 = 25
-RIN4 = 10
-LIN1 = 17
-LIN2 = 18
-LIN3 = 22
-LIN4 = 23
+RIN1 = 8        #白
+RIN2 = 25       #橘
+RIN3 = 24       #灰
+RIN4 = 23       #紫
+LIN1 = 4        #紅
+LIN2 = 14       #藍
+LIN3 = 15       #黃
+LIN4 = 18       #綠
 
 ENR_A = 6
 ENR_B = 12
-ENL_A = 19
-ENL_B = 16
+ENL_A = 2
+ENL_B = 3
 
 GPIO.setup(RIN1, GPIO.OUT, initial=GPIO.LOW)
 GPIO.setup(RIN2, GPIO.OUT, initial=GPIO.LOW)

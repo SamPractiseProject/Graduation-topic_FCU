@@ -5,14 +5,14 @@ from curses import wrapper
 
 GPIO.setmode(GPIO.BCM)
 
-RIN1 = 7
-RIN2 = 11
-RIN3 = 25
-RIN4 = 10
-LIN1 = 17
-LIN2 = 18
-LIN3 = 22
-LIN4 = 23
+RIN1 = 8        #白
+RIN2 = 25       #橘
+RIN3 = 24       #灰
+RIN4 = 23       #紫
+LIN1 = 4        #紅
+LIN2 = 14       #藍
+LIN3 = 15       #黃
+LIN4 = 18       #綠
 
 
 
