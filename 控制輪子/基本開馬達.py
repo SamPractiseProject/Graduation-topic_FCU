@@ -33,6 +33,7 @@ while True:
 # Quit
     if ch == 'q':
        curses.endwin()
+       
        GPIO.output(LIN1, GPIO.LOW)     #GPIO17
        GPIO.output(LIN2, GPIO.LOW)     #GPIO18
        GPIO.output(LIN3, GPIO.LOW)     #GPIO22
@@ -41,8 +42,8 @@ while True:
        GPIO.output(RIN2, GPIO.LOW)     #GPIO11
        GPIO.output(RIN3, GPIO.LOW)     #GPIO25
        GPIO.output(RIN4, GPIO.LOW)     #GPIO10
-
        GPIO.cleanup()       #清除GPIO資料
+       
 
        break
 
@@ -90,3 +91,4 @@ while True:
        GPIO.output(RIN2, GPIO.LOW)
        GPIO.output(RIN3, GPIO.LOW)
        GPIO.output(RIN4, GPIO.LOW)
+

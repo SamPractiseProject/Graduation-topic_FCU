@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import curses
 import time
 from curses import wrapper
-from espeak import espeak
+
 GPIO.setmode(GPIO.BCM)
 
 RIN1 = 8        #白
@@ -50,29 +50,34 @@ def Speed_Control(x):
     value=0
     global pwm_L_A, pwm_L_B, pwm_R_A, pwm_R_B
     if x == 'q':
-        for i in range(100,0,-10):
-            pwm_R_A.ChangeDutyCycle(i)
-            pwm_L_A.ChangeDutyCycle(i)
-            pwm_R_B.ChangeDutyCycle(i)
-            pwm_L_B.ChangeDutyCycle(i)
-            time.sleep(1)
+        pwm_R_A.ChangeDutyCycle(0)
+        pwm_L_A.ChangeDutyCycle(0)
+        pwm_R_B.ChangeDutyCycle(0)
+        pwm_L_B.ChangeDutyCycle(0)
 
-    if x == 'w':
-        for i in range(0,100,10):
-            pwm_R_A.ChangeDutyCycle(i)
-            pwm_L_A.ChangeDutyCycle(i)
-            pwm_R_B.ChangeDutyCycle(i)
-            pwm_L_B.ChangeDutyCycle(i)
-            time.sleep(1)
-    if x == 'x':
-        for i in range(0,100,10):
-            pwm_R_A.ChangeDutyCycle(i)
-            pwm_L_A.ChangeDutyCycle(i)
-            pwm_R_B.ChangeDutyCycle(i)
-            pwm_L_B.ChangeDutyCycle(i)
-            time.sleep(1)
+    elif x == 'w':
+        pwm_R_A.ChangeDutyCycle(100)
+        pwm_L_A.ChangeDutyCycle(100)
+        pwm_R_B.ChangeDutyCycle(100)
+        pwm_L_B.ChangeDutyCycle(100)
+        
+    elif x == 'x':
+        pwm_R_A.ChangeDutyCycle(100)
+        pwm_L_A.ChangeDutyCycle(100)
+        pwm_R_B.ChangeDutyCycle(100)
+        pwm_L_B.ChangeDutyCycle(100)
+    
+    elif x == 'a':
+        pwm_R_A.ChangeDutyCycle(100)
+        pwm_L_A.ChangeDutyCycle(30)
+        pwm_R_B.ChangeDutyCycle(100)
+        pwm_L_B.ChangeDutyCycle(30)
 
-
+    elif x == 'd':
+        pwm_R_A.ChangeDutyCycle(30)
+        pwm_L_A.ChangeDutyCycle(100)
+        pwm_R_B.ChangeDutyCycle(30)
+        pwm_L_B.ChangeDutyCycle(100)
 
 
 while True:
@@ -80,6 +85,8 @@ while True:
 # Quit
     if ch == 'q':
        curses.endwin()
+       Speed_Control(ch)
+       
        GPIO.output(LIN1, GPIO.LOW)     #GPIO17
        GPIO.output(LIN2, GPIO.LOW)     #GPIO18
        GPIO.output(LIN3, GPIO.LOW)     #GPIO22
@@ -88,14 +95,15 @@ while True:
        GPIO.output(RIN2, GPIO.LOW)     #GPIO11
        GPIO.output(RIN3, GPIO.LOW)     #GPIO25
        GPIO.output(RIN4, GPIO.LOW)     #GPIO10
-       Speed_Control(ch)
-
        GPIO.cleanup()       #清除GPIO資料
+
+      
 
        break
 
 # Forward
-    if ch == 'w':
+    elif ch == 'w':
+       Speed_Control(ch)
        GPIO.output(LIN1, GPIO.LOW)
        GPIO.output(LIN2, GPIO.HIGH)
        GPIO.output(LIN3, GPIO.LOW)
@@ -104,10 +112,11 @@ while True:
        GPIO.output(RIN2, GPIO.LOW)
        GPIO.output(RIN3, GPIO.LOW)
        GPIO.output(RIN4, GPIO.HIGH)
-       Speed_Control(ch)
+       
 
 # Backward
-    if ch == 'x':
+    elif ch == 'x':
+       Speed_Control(ch)
        GPIO.output(LIN1, GPIO.HIGH)
        GPIO.output(LIN2, GPIO.LOW)
        GPIO.output(LIN3, GPIO.HIGH)
@@ -118,19 +127,8 @@ while True:
        GPIO.output(RIN4, GPIO.LOW)
 
 # Turn Right
-    if ch == 'd':
-       GPIO.output(LIN1, GPIO.LOW)
-       GPIO.output(LIN2, GPIO.LOW)
-       GPIO.output(LIN3, GPIO.LOW)
-       GPIO.output(LIN4, GPIO.HIGH)
-       GPIO.output(RIN1, GPIO.HIGH)
-       GPIO.output(RIN2, GPIO.LOW)
-       GPIO.output(RIN3, GPIO.LOW)
-       GPIO.output(RIN4, GPIO.HIGH)
+    elif ch == 'd':
        Speed_Control(ch)
-
-# Turn Left
-    if ch == 'a':
        GPIO.output(LIN1, GPIO.LOW)
        GPIO.output(LIN2, GPIO.HIGH)
        GPIO.output(LIN3, GPIO.LOW)
@@ -138,5 +136,19 @@ while True:
        GPIO.output(RIN1, GPIO.HIGH)
        GPIO.output(RIN2, GPIO.LOW)
        GPIO.output(RIN3, GPIO.LOW)
-       GPIO.output(RIN4, GPIO.LOW)
+       GPIO.output(RIN4, GPIO.HIGH)
+
+# Turn Left
+    elif ch == 'a':
        Speed_Control(ch)
+       GPIO.output(LIN1, GPIO.LOW)
+       GPIO.output(LIN2, GPIO.HIGH)
+       GPIO.output(LIN3, GPIO.LOW)
+       GPIO.output(LIN4, GPIO.HIGH)
+       GPIO.output(RIN1, GPIO.HIGH)
+       GPIO.output(RIN2, GPIO.LOW)
+       GPIO.output(RIN3, GPIO.LOW)
+       GPIO.output(RIN4, GPIO.HIGH)
+
+
+GPIO.cleanup()       #清除GPIO資料
